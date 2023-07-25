@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -30,6 +34,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.engine('ejs', ejsMate)
 app.use(express.urlencoded({ extended: true }));
+
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 
