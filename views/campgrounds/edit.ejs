@@ -21,31 +21,40 @@
             </div>
             <div class="mb-3">
                 <label for="images" class="form-label">Add Images</label>
-                <input class="form-control" type="file" id="images" multiple>
+                <input accept=".png,.jpg,.jpeg" class="form-control" type="file" id="images" name="image" multiple>
             </div>
             <div class="valid-feedback">
                 Looks good!
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="price">Campground Price</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">$</span>
-                    <input type="number" class="form-control" value="<%= campground.price %>" id="price"
-                        placeholder="0.00" step=".01" name="campground[price]" required>
-                    <div class="valid-feedback">
-                        Looks good!
+            <% campground.images.forEach(function(img, i) {%>
+                <div class="mb-3">
+                    <img class="img-thumbnail" src="<%= img.thumbnail %>" alt="">
+                    <div class="form-check-inline">
+                        <input type="checkbox" name="deleteImages[]" id="image-<%= i %>" value="<%= img.filename %>">
                     </div>
+                    <label for="image-<%= i %>">Delete?</label>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" name="campground[description]" id="description"
-                    required><%= campground.description %></textarea>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-            <div class="mb-3"><button class="btn btn-success">Save</button></div>
+                <% }) %>
+                    <div class="mb-3">
+                        <label class="form-label" for="price">Campground Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">$</span>
+                            <input type="number" class="form-control" value="<%= campground.price %>" id="price"
+                                placeholder="0.00" step=".01" name="campground[price]" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description</label>
+                        <textarea class="form-control" type="text" name="campground[description]" id="description"
+                            required><%= campground.description %></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3"><button class="btn btn-success">Save</button></div>
         </form>
         <a href="/campgrounds/<%= campground._id %>">Back To Campground</a>
     </div>
